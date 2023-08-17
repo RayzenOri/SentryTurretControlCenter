@@ -13,7 +13,16 @@
         android:theme="@style/Theme.SentryTurretControlCenter"
         tools:targetApi="31">
         <activity
+            android:name=".LandscapeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OptionsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConnectActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
