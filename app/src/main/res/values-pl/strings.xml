@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sentry Turret Control Center</string>
+    <string name="am_btOff">Wyłącz</string>
+    <string name="am_btManual">Ręczny</string>
+    <string name="am_btSettings">Ustawienia</string>
+    <string name="am_btDisconnect">Rozłącz</string>
+    <string name="ao_lbRotorSpeed">Prędkość Obrotu</string>
+    <string name="ao_btBack">Powrót</string>
+    <string name="ao_lbPrecision">Precyzja</string>
+    <string name="ao_tvSeconds">Sekund</string>
+    <string name="ao_lbReturnTime">Czas Powrotu</string>
+    <string name="ao_swPatrolMode">Tryb Patrolowania</string>
+</resources>

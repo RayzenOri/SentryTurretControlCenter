@@ -6,4 +6,184 @@
     android:layout_height="match_parent"
     tools:context=".OptionsActivity">
 
+    <EditText
+        android:id="@+id/editPrecisionX"
+        android:layout_width="47dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="132dp"
+        android:ems="10"
+        android:hint="X"
+        android:inputType="number|numberDecimal"
+        android:maxLength="2"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editRotationX"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <EditText
+        android:id="@+id/editReturnTime"
+        android:layout_width="47dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:hint="10"
+        android:inputType="number|numberDecimal"
+        android:maxLength="2"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.362"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPrecisionX"
+        app:layout_constraintVertical_bias="0.014" />
+
+    <TextView
+        android:id="@+id/labelRotorSP3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/ao_lbRotorSpeed"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editRotationX"
+        app:layout_constraintEnd_toStartOf="@+id/editRotationX"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@+id/editRotationX"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editPrecisionY"
+        android:layout_width="47dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:hint="Y"
+        android:inputType="number|numberDecimal"
+        android:maxLength="2"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/editPrecisionX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editRotationX"
+        app:layout_constraintTop_toTopOf="@+id/editPrecisionX"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ao_btBack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956" />
+
+    <TextView
+        android:id="@+id/labelPrecision"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/ao_lbPrecision"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editPrecisionX"
+        app:layout_constraintEnd_toStartOf="@+id/editPrecisionX"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@+id/editPrecisionX"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/labelReturnTime"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/ao_lbReturnTime"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editReturnTime"
+        app:layout_constraintEnd_toStartOf="@+id/editReturnTime"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@+id/editReturnTime"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editRotationX"
+        android:layout_width="47dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="132dp"
+        android:ems="10"
+        android:hint="X"
+        android:inputType="number|numberDecimal"
+        android:maxLength="2"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102" />
+
+    <EditText
+        android:id="@+id/editRotationY"
+        android:layout_width="47dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:hint="Y"
+        android:inputType="number|numberDecimal"
+        android:maxLength="2"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/editRotationX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editRotationX"
+        app:layout_constraintTop_toTopOf="@+id/editRotationX" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewSeconds"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/ao_tvSeconds"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editReturnTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editReturnTime"
+        app:layout_constraintTop_toTopOf="@+id/editReturnTime"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <Switch
+        android:id="@+id/switchPatrolMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchPadding="10dp"
+        android:text="@string/ao_swPatrolMode"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toBottomOf="@+id/editReturnTime"
+        app:layout_constraintVertical_bias="0.052" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
