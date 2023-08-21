@@ -43,16 +43,16 @@
         android:id="@+id/labelRotorSP3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="center|left"
         android:text="@string/ao_lbRotorSpeed"
-        android:textAlignment="textStart"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/editRotationX"
         app:layout_constraintEnd_toStartOf="@+id/editRotationX"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toTopOf="@+id/editRotationX"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="RtlCompat" />
 
     <EditText
         android:id="@+id/editPrecisionY"
@@ -81,15 +81,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.956"
+        android:onClick="goBackToMainActivity"/>
 
     <TextView
         android:id="@+id/labelPrecision"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="center|left"
         android:text="@string/ao_lbPrecision"
-        android:textAlignment="textStart"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/editPrecisionX"
         app:layout_constraintEnd_toStartOf="@+id/editPrecisionX"
@@ -102,9 +102,8 @@
         android:id="@+id/labelReturnTime"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="center|left"
         android:text="@string/ao_lbReturnTime"
-        android:textAlignment="textStart"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/editReturnTime"
         app:layout_constraintEnd_toStartOf="@+id/editReturnTime"
@@ -160,9 +159,8 @@
         android:id="@+id/textViewSeconds"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="center|left"
         android:text="@string/ao_tvSeconds"
-        android:textAlignment="textStart"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/editReturnTime"
         app:layout_constraintEnd_toEndOf="parent"

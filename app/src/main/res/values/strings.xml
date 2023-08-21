@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sentry Turret Control Center</string>
+    <string name="app_name" translatable="false">Sentry Turret Control Center</string>
     <string name="am_btOff">Off</string>
     <string name="am_btAuto" translatable="false">Auto</string>
     <string name="am_btManual">Manual</string>
@@ -11,4 +11,7 @@
     <string name="ao_tvSeconds">Seconds</string>
     <string name="ao_lbReturnTime">Return Time</string>
     <string name="ao_swPatrolMode">Patrol Mode</string>
+    <string name="ac_btConnect">Connect</string>
+    <string name="StatusDisconnected">Disconnected</string>
+    <string name="StatusConnected">Connected</string>
 </resources>
