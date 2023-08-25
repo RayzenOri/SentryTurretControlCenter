@@ -26,13 +26,11 @@ class MainActivity : AppCompatActivity() {
     }
     fun disconnectFromDevice(view: View){
         //Symulacja próby rozłączenia
-        if(binding.amTextStatus.text.toString() == getString(R.string.StatusConnected))
-        {
-            //Przejście do aktywności połączeniowej
-            val intent = Intent(this,ConnectActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        //Przejście do aktywności połączeniowej
+        ConnectionManager.isConnected = false
+        val intent = Intent(this,ConnectActivity::class.java)
+        startActivity(intent)
+        finish()
     }
     fun goToSettings(view: View){
         val intent = Intent(this, OptionsActivity::class.java).apply {

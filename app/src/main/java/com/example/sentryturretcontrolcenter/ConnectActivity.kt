@@ -15,17 +15,27 @@ class ConnectActivity : AppCompatActivity() {
     }
     fun connectToDevice(view: View){
         //Symulacja próby połączenia
-        val isConnected = findViewById<TextView>(R.id.ac_textStatus)
-        if(isConnected.text.toString() == getString(R.string.StatusDisconnected)){
-            isConnected.text = getString(R.string.StatusConnected);
+        val ipAddress = "192.168.4.1"
+        ConnectionManager.ipAddress = ipAddress
+        val isConnectedText = findViewById<TextView>(R.id.ac_textStatus)
+
+
+        if(checkConnection(ipAddress)){
+            isConnectedText.text = getString(R.string.StatusConnected);
             Thread.sleep(2_000)
+
+            ConnectionManager.isConnected = true
+
             //Przejście do aktywności głównej
             val intent = Intent(this,MainActivity::class.java).apply {
-                putExtra("connectionStatus",isConnected.text.toString())
+                putExtra("connectionStatus",isConnectedText.text.toString())
             }
             startActivity(intent)
             finish()
         }
 
+    }
+    private fun checkConnection(ipAddress: String): Boolean {
+        return ConnectionChecker.checkConnectionAsync(ipAddress)
     }
 }
