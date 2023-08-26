@@ -1,17 +1,23 @@
 package com.example.sentryturretcontrolcenter
 
+import NotificationSystem
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.sentryturretcontrolcenter.databinding.ActivityMainBinding
+import java.util.concurrent.Executors
 import com.example.sentryturretcontrolcenter.databinding.ActivityOptionsBinding
+import java.net.HttpURLConnection
+import java.net.URL
+import java.io.IOException
 
-class OptionsActivity : AppCompatActivity() {
+
+class OptionsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityOptionsBinding
     private var isConnected:String = "Disconnected" //Wartość domyślna
+    private val executor = Executors.newSingleThreadExecutor() //pozwala na wykonywanie operacji w tle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +33,39 @@ class OptionsActivity : AppCompatActivity() {
         isConnected = intent.getStringExtra("connectionStatus").toString()
         Log.d("Connection Status:", isConnected)
     }
+
+    fun sendRotation(view: View){
+        val value = binding.editRotationX.text.toString()
+        sendValue(value)
+    }
+
+    private fun sendValue(value: String){
+        executor.execute{
+            try {
+                val url = URL("http://192.168.4.1/command?cmd=set_value=$value")
+                val connection = url.openConnection() as HttpURLConnection
+                connection.requestMethod = "GET"
+
+                val responseCode = connection.responseCode
+                val notificationSystem = NotificationSystem(this)
+                runOnUiThread{
+                    if(responseCode == HttpURLConnection.HTTP_OK){ // Successfully sent the value to ESP32
+
+                        notificationSystem.showToast(getString(R.string.notification_successSent)) // Wyświetlenie komunikatu
+                        binding.editRotationX.hint = value
+
+                    }else{
+                        notificationSystem.showToast(getString(R.string.notification_failSent)) // Wyświetlenie komunikatu
+                    }
+                }
+
+                connection.disconnect()
+            }catch (e:IOException){
+                e.printStackTrace()
+            }
+        }
+    }
+
     fun goBackToMainActivity(view: View){
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra("connectionStatus", isConnected)
@@ -34,4 +73,5 @@ class OptionsActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 }

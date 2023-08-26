@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/editPrecisionX"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="132dp"
         android:ems="10"
         android:hint="X"
@@ -24,8 +24,8 @@
 
     <EditText
         android:id="@+id/editReturnTime"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:hint="10"
         android:inputType="number|numberDecimal"
@@ -56,8 +56,8 @@
 
     <EditText
         android:id="@+id/editPrecisionY"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
         android:ems="10"
         android:hint="Y"
         android:inputType="number|numberDecimal"
@@ -114,8 +114,8 @@
 
     <EditText
         android:id="@+id/editRotationX"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="132dp"
         android:ems="10"
         android:hint="X"
@@ -130,8 +130,8 @@
 
     <EditText
         android:id="@+id/editRotationY"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
         android:ems="10"
         android:hint="Y"
         android:inputType="number|numberDecimal"
@@ -139,8 +139,6 @@
         android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/editRotationX"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editRotationX"
         app:layout_constraintTop_toTopOf="@+id/editRotationX" />
 
@@ -172,7 +170,7 @@
     <Switch
         android:id="@+id/switchPatrolMode"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:switchPadding="10dp"
         android:text="@string/ao_swPatrolMode"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -183,5 +181,19 @@
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/editReturnTime"
         app:layout_constraintVertical_bias="0.052" />
+
+    <Button
+        android:id="@+id/ao_btSend"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="52dp"
+        android:onClick="sendRotation"
+        android:text="@string/ao_btSend"
+        app:layout_constraintBottom_toBottomOf="@+id/editRotationY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editRotationY"
+        app:layout_constraintTop_toTopOf="@+id/editRotationY"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

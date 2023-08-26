@@ -13,4 +13,9 @@
     <string name="ac_btConnect">Połącz</string>
     <string name="StatusDisconnected">Rozłączono</string>
     <string name="StatusConnected">Połączono</string>
+    <string name="notification_success">Sukces</string>
+    <string name="notification_successSent">Przesłano pomyślnie</string>
+    <string name="notification_fail">Błąd</string>
+    <string name="notification_failSent">Błąd przesyłania</string>
+    <string name="ao_btSend">Wyślij</string>
 </resources>

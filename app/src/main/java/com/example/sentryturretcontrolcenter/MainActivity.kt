@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.TextView
 import com.example.sentryturretcontrolcenter.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
