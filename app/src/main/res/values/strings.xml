@@ -19,4 +19,10 @@
     <string name="notification_fail">Failed</string>
     <string name="notification_failSent">Sent Failed</string>
     <string name="ao_btSend">Send</string>
+    <string name="ac_btGoToSettings">Wi-Fi Settings</string>
+    <string name="ac_btContinue">Continue</string>
+    <string name="StatusWiFiDisabled">Wi-Fi is Off</string>
+    <string name="StatusConnectedToTurret">Connected with The Turret</string>
+    <string name="StatusDisconnectedFromTurret">Not Connected with The Turret</string>
+    <string name="StatusConnectedWithTurret">Connection status:</string>
 </resources>

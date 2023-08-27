@@ -14,9 +14,12 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 
 class ConnectActivity : BaseActivity() {
+
+    private var btPressed = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_connect)
@@ -29,10 +32,20 @@ class ConnectActivity : BaseActivity() {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
+
+
         }
+
 
     }
     fun connectToDevice(view: View) {
+        btPressed = true
+        onResume()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         if (wifiManager.isWifiEnabled) {
             // Wi-Fi jest włączone
@@ -47,33 +60,46 @@ class ConnectActivity : BaseActivity() {
                     val ssid = wifiInfo.ssid
                     if (ssid == "\"ESP32\"") {
                         // Telefon jest podłączony do sieci ESP32
-                        // Symulacja próby połączenia
                         runOnUiThread {
-                            // Kod zmieniający widok
-                            val isConnected = findViewById<TextView>(R.id.ac_textStatus)
-                            isConnected.text = getString(R.string.StatusConnected)
-                            // Przejście do aktywności głównej
-                            val intent = Intent(this@ConnectActivity, MainActivity::class.java).apply {
-                                putExtra("connectionStatus", isConnected.text.toString())
+                            findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btContinue) //Zmiana textu przycisku
+                            findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusConnectedToTurret)
+                            if (btPressed){
+                                btPressed = false
+                                val intent = Intent(this@ConnectActivity, MainActivity::class.java).apply {
+                                    putExtra("connectionStatus", getString(R.string.StatusConnected).toString())
+                                }
+                                startActivity(intent)
+                                finish()
                             }
-                            startActivity(intent)
-                            finish()
                         }
                     } else {
                         // Telefon nie jest podłączony do sieci ESP32, przełącz użytkownika do ustawień Wi-Fi
-                        val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
-                        startActivity(intent)
+                        runOnUiThread {
+                            findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btConnect)
+                            findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusDisconnectedFromTurret)
+                            if (btPressed){
+                                btPressed = false
+                                val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
+                                startActivity(intent)
+                            }
+                        }
                     }
                 }
             }
             connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
         } else {
-            // Wi-Fi jest wyłączone, przełącz użytkownika do ustawień Wi-Fi
-            val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
-            startActivity(intent)
+            // Wi-Fi jest wyłączone
+            runOnUiThread{
+                findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusWiFiDisabled)
+                findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btGoToSettings)
+                if (btPressed){
+                    btPressed = false
+                    val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
+                    startActivity(intent)
+                }
+            }
         }
     }
-
 
 }
 

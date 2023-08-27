@@ -25,19 +25,23 @@ class MainActivity : BaseActivity() {
 
     }
     fun disconnectFromDevice(view: View){
-        //Symulacja próby rozłączenia
-        if(binding.amTextStatus.text.toString() == getString(R.string.StatusConnected))
-        {
-            //Przejście do aktywności połączeniowej
-            val intent = Intent(this,ConnectActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        //Przejście do aktywności połączeniowej
+        val intent = Intent(this,ConnectActivity::class.java)
+        startActivity(intent)
+        finish()
+
     }
     fun goToSettings(view: View){
         val intent = Intent(this, OptionsActivity::class.java).apply {
             putExtra("connectionStatus",  binding.amTextStatus.text.toString())
         }
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        //Przejście do aktywności połączeniowej
+        val intent = Intent(this,ConnectActivity::class.java)
         startActivity(intent)
         finish()
     }

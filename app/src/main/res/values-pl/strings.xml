@@ -18,4 +18,10 @@
     <string name="notification_fail">Błąd</string>
     <string name="notification_failSent">Błąd przesyłania</string>
     <string name="ao_btSend">Wyślij</string>
+    <string name="ac_btGoToSettings">Ustawienia Wi-Fi</string>
+    <string name="ac_btContinue">Kontynuuj</string>
+    <string name="StatusWiFiDisabled">Wi-Fi jest wyłączone</string>
+    <string name="StatusConnectedToTurret">Połączono z Wieżyczką</string>
+    <string name="StatusDisconnectedFromTurret">Nie połączono z Wieżyczką</string>
+    <string name="StatusConnectedWithTurret">Status połączenia:</string>
 </resources>

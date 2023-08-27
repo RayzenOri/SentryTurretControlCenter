@@ -35,8 +35,27 @@ class OptionsActivity : BaseActivity() {
     }
 
     fun sendRotation(view: View){
-        val value = binding.editRotationX.text.toString()
+        val value = "set_rotation_x=" + binding.editRotationX.text.toString() +
+                "_y=" + binding.editRotationY.text.toString()
+        //sendValue(value)
+        Log.d("TAG",value)
+    }
+    fun sendPrecision(view: View){
+        val value = "set_precision_x=" + binding.editPrecisionX.text.toString() +
+                "_y=" + binding.editPrecisionY.text.toString()
+        //sendValue(value)
+        Log.d("TAG",value)
+    }
+    fun sendReturnTime(view: View){
+        val value = "set_return_time=" + binding.editReturnTime.text.toString()
         sendValue(value)
+        //sendValue(value)
+        Log.d("TAG",value)
+    }
+    fun sendMode(view: View){
+        val value = "set_mode=" + if(binding.switchPatrolMode.isChecked) "on" else "off"
+        //sendValue(value)
+        Log.d("TAG",value)
     }
 
     private fun sendValue(value: String){
@@ -67,6 +86,13 @@ class OptionsActivity : BaseActivity() {
     }
 
     fun goBackToMainActivity(view: View){
+        val intent = Intent(this, MainActivity::class.java).apply {
+            putExtra("connectionStatus", isConnected)
+        }
+        startActivity(intent)
+        finish()
+    }
+    override fun onBackPressed() {
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra("connectionStatus", isConnected)
         }
