@@ -47,7 +47,8 @@ class OptionsActivity : BaseActivity() {
         Log.d("TAG",value)
     }
     fun sendReturnTime(view: View){
-        val value = "set_return_time=" + binding.editReturnTime.text.toString()
+        var value = "set_return_time=" + binding.editReturnTime.text.toString()
+        if(value.toInt()>60) value = "60"
         sendValue(value)
         //sendValue(value)
         Log.d("TAG",value)
