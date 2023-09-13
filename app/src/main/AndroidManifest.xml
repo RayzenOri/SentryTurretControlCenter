@@ -30,16 +30,20 @@
         <activity
             android:name=".LandscapeActivity"
             android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
             android:name=".OptionsActivity"
             android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ConnectActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
