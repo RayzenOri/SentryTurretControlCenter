@@ -39,6 +39,14 @@ class MainActivity : BaseActivity() {
         finish()
     }
 
+    fun goToManualControl(view: View){
+        val intent = Intent(this, LandscapeActivity::class.java).apply {
+            putExtra("connectionStatus",  binding.amTextStatus.text.toString())
+        }
+        startActivity(intent)
+        finish()
+    }
+
     override fun onBackPressed() {
         //Przejście do aktywności połączeniowej
         val intent = Intent(this,ConnectActivity::class.java)

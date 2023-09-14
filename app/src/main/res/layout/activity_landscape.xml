@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".LandscapeActivity">
 
-    <com.example.sentryturretcontrolcenter.JoystickView
-        android:id="@+id/joystick"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:foreground="@drawable/joystick"
+    <io.github.controlwear.virtual.joystick.android.JoystickView
+        android:id="@+id/joystickView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/joystick"
+        app:JV_buttonColor="#B3AAB7B8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
