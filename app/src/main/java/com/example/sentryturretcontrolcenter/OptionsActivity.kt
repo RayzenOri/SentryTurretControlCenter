@@ -1,16 +1,11 @@
 package com.example.sentryturretcontrolcenter
 
-import NotificationSystem
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import java.util.concurrent.Executors
 import com.example.sentryturretcontrolcenter.databinding.ActivityOptionsBinding
-import java.net.HttpURLConnection
-import java.net.URL
-import java.io.IOException
 
 
 class OptionsActivity : BaseActivity() {
@@ -34,32 +29,31 @@ class OptionsActivity : BaseActivity() {
         Log.d("Connection Status:", isConnected)
     }
 
-    fun sendRotation(view: View){
-        val value = "set_rotation_x=" + binding.editRotationX.text.toString() +
+    fun sendRotationSpeed(view: View){
+        val value = "set_rotation_speed_x=" + binding.editRotationX.text.toString() +
                 "_y=" + binding.editRotationY.text.toString()
-        //sendValue(value)
+        //ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
     fun sendPrecision(view: View){
         val value = "set_precision_x=" + binding.editPrecisionX.text.toString() +
                 "_y=" + binding.editPrecisionY.text.toString()
-        //sendValue(value)
+        //ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
     fun sendReturnTime(view: View){
         var value = "set_return_time=" + binding.editReturnTime.text.toString()
         if(value.toInt()>60) value = "60"
-        sendValue(value)
-        //sendValue(value)
+        ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
     fun sendMode(view: View){
         val value = "set_mode=" + if(binding.switchPatrolMode.isChecked) "on" else "off"
-        //sendValue(value)
+        //ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
 
-    private fun sendValue(value: String){
+    /*private fun sendValue(value: String){
         executor.execute{
             try {
                 val url = URL("http://192.168.4.1/command?cmd=set_value=$value")
@@ -85,7 +79,7 @@ class OptionsActivity : BaseActivity() {
             }
         }
     }
-
+*/
     fun goBackToMainActivity(view: View){
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra("connectionStatus", isConnected)

@@ -47,59 +47,47 @@ class ConnectActivity : BaseActivity() {
         super.onResume()
 
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        Log.d("WIFI ENABLED", wifiManager.isWifiEnabled.toString())
+
         if (wifiManager.isWifiEnabled) {
-            // Wi-Fi jest włączone
-            val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val networkRequest = NetworkRequest.Builder()
-                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-                .build()
-            val networkCallback = object : ConnectivityManager.NetworkCallback(ConnectivityManager.NetworkCallback.FLAG_INCLUDE_LOCATION_INFO) {
-                override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
-                    super.onCapabilitiesChanged(network, networkCapabilities)
-                    val wifiInfo = networkCapabilities.transportInfo as WifiInfo
-                    val ssid = wifiInfo.ssid
-                    if (ssid == "\"ESP32\"") {
-                        // Telefon jest podłączony do sieci ESP32
-                        runOnUiThread {
-                            findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btContinue) //Zmiana textu przycisku
-                            findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusConnectedToTurret)
-                            if (btPressed){
-                                btPressed = false
-                                val intent = Intent(this@ConnectActivity, MainActivity::class.java).apply {
-                                    putExtra("connectionStatus", getString(R.string.StatusConnected).toString())
-                                }
-                                startActivity(intent)
-                                finish()
-                            }
-                        }
-                    } else {
-                        // Telefon nie jest podłączony do sieci ESP32, przełącz użytkownika do ustawień Wi-Fi
-                        runOnUiThread {
-                            findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btConnect)
-                            findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusDisconnectedFromTurret)
-                            if (btPressed){
-                                btPressed = false
-                                val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
-                                startActivity(intent)
-                            }
-                        }
+            val wifiInfo = wifiManager.connectionInfo
+            val ssid = wifiInfo.ssid
+            Log.d("SSID", ssid)
+
+            if (ssid == "\"ESP32\"") {
+                // Jesteś podłączony do sieci ESP32
+                findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btContinue)
+                findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusConnectedToTurret)
+                if (btPressed) {
+                    btPressed = false
+                    val intent = Intent(this@ConnectActivity, MainActivity::class.java).apply {
+                        putExtra("connectionStatus", getString(R.string.StatusConnected).toString())
                     }
+                    startActivity(intent)
+                    finish()
                 }
-            }
-            connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
-        } else {
-            // Wi-Fi jest wyłączone
-            runOnUiThread{
-                findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusWiFiDisabled)
-                findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btGoToSettings)
-                if (btPressed){
+            } else {
+                // Nie jesteś podłączony do sieci ESP32
+                findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btConnect)
+                findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusDisconnectedFromTurret)
+                if (btPressed) {
                     btPressed = false
                     val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
                     startActivity(intent)
                 }
             }
+        } else {
+            // WiFi jest wyłączone
+            findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusWiFiDisabled)
+            findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btGoToSettings)
+            if (btPressed) {
+                btPressed = false
+                val intent = Intent(WifiManager.ACTION_PICK_WIFI_NETWORK)
+                startActivity(intent)
+            }
         }
     }
+
 
 }
 

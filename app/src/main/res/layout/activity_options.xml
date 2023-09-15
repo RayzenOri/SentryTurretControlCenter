@@ -187,7 +187,7 @@
         android:id="@+id/ao_btSendRotation"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:onClick="sendRotation"
+        android:onClick="sendRotationSpeed"
         android:text="@string/ao_btSend"
         app:layout_constraintBottom_toBottomOf="@+id/editRotationY"
         app:layout_constraintEnd_toEndOf="@+id/ao_btSendPrecision"
