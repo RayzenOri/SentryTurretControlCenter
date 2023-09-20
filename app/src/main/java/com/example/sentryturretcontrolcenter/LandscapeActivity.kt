@@ -2,21 +2,58 @@ package com.example.sentryturretcontrolcenter
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import android.view.View
 import io.github.controlwear.virtual.joystick.android.JoystickView
+import org.videolan.libvlc.LibVLC
+import org.videolan.libvlc.Media
+import org.videolan.libvlc.MediaPlayer
 
 class LandscapeActivity : BaseActivity() {
 
     private var isConnected:String = "Disconnected" //Wartość domyślna
+    private var mediaPlayer: MediaPlayer? = null
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landscape)
+
+
+        val surfaceView = findViewById<SurfaceView>(R.id.surfaceView)
+        val libVLC = LibVLC(this, listOf("--no-drop-late-frames", "--no-skip-frames", "--rtsp-tcp").toMutableList())
+        mediaPlayer = MediaPlayer(libVLC)
+
+        val media = Media(libVLC, Uri.parse("rtsp://192.168.4.100:554"))
+        mediaPlayer?.media = media
+        media.release()
+
+        surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
+            override fun surfaceCreated(holder: SurfaceHolder) {
+                mediaPlayer?.setMedia(media)
+                mediaPlayer?.setVideoTrackEnabled(true)
+            }
+
+            override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+                // Obsłuż zmiany powierzchni tutaj
+            }
+
+            override fun surfaceDestroyed(holder: SurfaceHolder) {
+                // Obsłuż zniszczenie powierzchni tutaj
+                mediaPlayer?.stop()
+                mediaPlayer?.release()
+                mediaPlayer = null
+            }
+        })
+
+        mediaPlayer?.play()
+
 
         //Odczytanie przekazanego statusu połączenia
         isConnected = intent.getStringExtra("connectionStatus").toString()
@@ -76,6 +113,13 @@ class LandscapeActivity : BaseActivity() {
             }
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     fun goBackToMainActivity(view: View){
