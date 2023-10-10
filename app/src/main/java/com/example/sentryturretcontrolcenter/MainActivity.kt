@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.TextView
 import com.example.sentryturretcontrolcenter.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,17 +25,31 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun disconnectFromDevice(view: View){
-        //Symulacja próby rozłączenia
         //Przejście do aktywności połączeniowej
-        ConnectionManager.isConnected = false
         val intent = Intent(this,ConnectActivity::class.java)
         startActivity(intent)
         finish()
+
     }
     fun goToSettings(view: View){
         val intent = Intent(this, OptionsActivity::class.java).apply {
             putExtra("connectionStatus",  binding.amTextStatus.text.toString())
         }
+        startActivity(intent)
+        finish()
+    }
+
+    fun goToManualControl(view: View){
+        val intent = Intent(this, LandscapeActivity::class.java).apply {
+            putExtra("connectionStatus",  binding.amTextStatus.text.toString())
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        //Przejście do aktywności połączeniowej
+        val intent = Intent(this,ConnectActivity::class.java)
         startActivity(intent)
         finish()
     }

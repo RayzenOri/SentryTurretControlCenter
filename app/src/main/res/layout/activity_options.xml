@@ -8,13 +8,13 @@
 
     <EditText
         android:id="@+id/editPrecisionX"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="132dp"
         android:ems="10"
         android:hint="X"
         android:inputType="number|numberDecimal"
-        android:maxLength="2"
+        android:maxLength="1"
         android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,8 +24,8 @@
 
     <EditText
         android:id="@+id/editReturnTime"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:hint="10"
         android:inputType="number|numberDecimal"
@@ -56,12 +56,12 @@
 
     <EditText
         android:id="@+id/editPrecisionY"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
         android:ems="10"
         android:hint="Y"
         android:inputType="number|numberDecimal"
-        android:maxLength="2"
+        android:maxLength="1"
         android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/editPrecisionX"
@@ -114,13 +114,13 @@
 
     <EditText
         android:id="@+id/editRotationX"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="132dp"
         android:ems="10"
         android:hint="X"
         android:inputType="number|numberDecimal"
-        android:maxLength="2"
+        android:maxLength="1"
         android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,17 +130,15 @@
 
     <EditText
         android:id="@+id/editRotationY"
-        android:layout_width="47dp"
-        android:layout_height="42dp"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
         android:ems="10"
         android:hint="Y"
         android:inputType="number|numberDecimal"
-        android:maxLength="2"
+        android:maxLength="1"
         android:singleLine="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/editRotationX"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editRotationX"
         app:layout_constraintTop_toTopOf="@+id/editRotationX" />
 
@@ -172,7 +170,7 @@
     <Switch
         android:id="@+id/switchPatrolMode"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:switchPadding="10dp"
         android:text="@string/ao_swPatrolMode"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -182,6 +180,47 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/editReturnTime"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.052"
+        android:onClick="sendMode"/>
+
+    <Button
+        android:id="@+id/ao_btSendRotation"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:onClick="sendRotationSpeed"
+        android:text="@string/ao_btSend"
+        app:layout_constraintBottom_toBottomOf="@+id/editRotationY"
+        app:layout_constraintEnd_toEndOf="@+id/ao_btSendPrecision"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ao_btSendPrecision"
+        app:layout_constraintTop_toTopOf="@+id/editRotationY"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/ao_btSendPrecision"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:onClick="sendPrecision"
+        android:text="@string/ao_btSend"
+        app:layout_constraintBottom_toBottomOf="@+id/editPrecisionY"
+        app:layout_constraintEnd_toEndOf="@+id/ao_btSendReturnTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeconds"
+        app:layout_constraintTop_toTopOf="@+id/editPrecisionY"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/ao_btSendReturnTime"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="52dp"
+        android:onClick="sendReturnTime"
+        android:text="@string/ao_btSend"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSeconds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeconds"
+        app:layout_constraintTop_toTopOf="@+id/textViewSeconds"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

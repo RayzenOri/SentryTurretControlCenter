@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".LandscapeActivity">
 
+    <io.github.controlwear.virtual.joystick.android.JoystickView
+        android:id="@+id/joystickView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/joystick"
+        app:JV_buttonColor="#B3AAB7B8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.948" />
+
+    <RelativeLayout
+        android:layout_width="550dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/joystickView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:context=".MainActivity">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
