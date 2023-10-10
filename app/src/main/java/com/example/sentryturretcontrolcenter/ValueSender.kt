@@ -1,8 +1,8 @@
 package com.example.sentryturretcontrolcenter
 
 import NotificationSystem
+import android.app.Activity
 import android.content.Context
-import android.widget.Toast
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -22,18 +22,27 @@ object ValueSender {
 
                 val notificationSystem = NotificationSystem(context)
 
-                if (responseCode == HttpURLConnection.HTTP_OK) { // Successfully sent the value to ESP32
-                    notificationSystem.showToast("Value sent successfully") // Wyświetlenie komunikatu
-                } else {
-                    notificationSystem.showToast("Failed to send value") // Wyświetlenie komunikatu
+                if (!value.contains("set_rotation_x=")) { // Dodana linia warunkowa
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        (context as Activity).runOnUiThread {
+                            notificationSystem.showToast("Value sent successfully")
+                        }
+                    } else {
+                        (context as Activity).runOnUiThread {
+                            notificationSystem.showToast("Failed to send value")
+                        }
+                    }
                 }
 
                 connection.disconnect()
             } catch (e: IOException) {
                 e.printStackTrace()
-                val notificationSystem = NotificationSystem(context)
-                notificationSystem.showToast("Error: ${e.message}")
+                (context as Activity).runOnUiThread {
+                    val notificationSystem = NotificationSystem(context)
+                    notificationSystem.showToast("Error: ${e.message}")
+                }
             }
         }
     }
 }
+

@@ -63,53 +63,54 @@ class LandscapeActivity : BaseActivity() {
             // tutaj możesz zrobić co chcesz z wartościami kąta i siły
             //Log.d("Angle",angle.toString())
 
-            //Stop
-            if(angle==0){
-                Log.d("Stop", "Stop")
-                var value = "set_rotation_x=off_y=off"
-                //ValueSender.sendValue(this,value)
 
-            }
-            //Prawo
-            else if((angle>337 || angle<22) && angle>0){
-                Log.d("Kierunek","PRAWO")
-                var value = "set_rotation_x=right_y=off"
-                //ValueSender.sendValue(this,value)
-            }
-            else if(angle in 23..66){
-                Log.d("Kierunek","PRAWY-GÓRNY")
-                var value = "set_rotation_x=right_y=up"
-                //ValueSender.sendValue(this,value)
-            }
-            else if(angle in 67..112){
-                Log.d("Kierunek","GÓRA")
-                var value = "set_rotation_x=off_y=up"
-                //ValueSender.sendValue(this,value)
-            }
-            else if(angle in 113..157){
-                Log.d("Kierunek","LEWY-GÓRNY")
-                var value = "set_rotation_x=left_y=up"
-                //ValueSender.sendValue(this,value)
-            }
-            else if(angle in 158..202){
-                Log.d("Kierunek","LEWY")
-                var value = "set_rotation_x=left_y=off"
-                //ValueSender.sendValue(this,value)
-            }
-            else if(angle in 203 .. 247){
-                Log.d("Kierunek","LEWY-DOLNY")
-                var value = "set_rotation_x=left_y=down"
-                //ValueSender.sendValue(this,value)
-            }
-            else if(angle in 248 .. 292){
-                Log.d("Kierunek","DÓŁ")
-                var value = "set_rotation_x=off_y=down"
-                //ValueSender.sendValue(this,value)
-            }
-            else if(angle in 293 .. 337){
-                Log.d("Kierunek","PRAWY-DOLNY")
-                var value = "set_rotation_x=right_y=down"
-                //ValueSender.sendValue(this,value)
+            if(strength in 0..50){
+                Log.d("Stop", "Stop") //Stop
+                var value = "set_rotation_x=off_y=off"
+                ValueSender.sendValue(this,value)
+            }else{
+                when(angle){
+                    in 337..360, in 0..22-> { //PRAWO
+                        Log.d("Kierunek","PRAWO")
+                        var value = "set_rotation_x=right_y=off"
+                        ValueSender.sendValue(this,value)
+                    }
+                    in 23..66->{
+                        Log.d("Kierunek","PRAWY-GÓRNY") //PRAWY-GÓRNY
+                        var value = "set_rotation_x=right_y=up"
+                        ValueSender.sendValue(this,value)
+                    }
+                    in 67..112->{
+                        Log.d("Kierunek","GÓRA") //GÓRA
+                        var value = "set_rotation_x=off_y=up"
+                        ValueSender.sendValue(this,value)
+                    }
+                    in 113..157->{
+                        Log.d("Kierunek","LEWY-GÓRNY") //LEWY-GÓRNY
+                        var value = "set_rotation_x=left_y=up"
+                        ValueSender.sendValue(this,value)
+                    }
+                    in 158..202->{
+                        Log.d("Kierunek","LEWY") //LEWY
+                        var value = "set_rotation_x=left_y=off"
+                        ValueSender.sendValue(this,value)
+                    }
+                    in 203 .. 247->{
+                        Log.d("Kierunek","LEWY-DOLNY") //LEWY-DOLNY
+                        var value = "set_rotation_x=left_y=down"
+                        ValueSender.sendValue(this,value)
+                    }
+                    in 248 .. 292->{
+                        Log.d("Kierunek","DÓŁ") //DÓŁ
+                        var value = "set_rotation_x=off_y=down"
+                        ValueSender.sendValue(this,value)
+                    }
+                    in 293 .. 337->{
+                        Log.d("Kierunek","PRAWY-DOLNY") //PRAWY-DOLNY
+                        var value = "set_rotation_x=right_y=down"
+                        ValueSender.sendValue(this,value)
+                    }
+                }
             }
         }
 
