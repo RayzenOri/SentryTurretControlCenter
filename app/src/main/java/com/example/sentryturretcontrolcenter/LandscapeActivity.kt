@@ -30,7 +30,7 @@ class LandscapeActivity : BaseActivity() {
         val libVLC = LibVLC(this, listOf("--no-drop-late-frames", "--no-skip-frames", "--rtsp-tcp").toMutableList())
         mediaPlayer = MediaPlayer(libVLC)
 
-        val media = Media(libVLC, Uri.parse("rtsp://192.168.4.100/stream"))
+        val media = Media(libVLC, Uri.parse("rtsp://192.168.4.100:81/stream"))
         mediaPlayer?.media = media
         media.release()
 
