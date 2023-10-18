@@ -22,15 +22,10 @@ object ValueSender {
 
                 val notificationSystem = NotificationSystem(context)
 
-                if (!value.contains("set_rotation_x=")) { // Dodana linia warunkowa
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        (context as Activity).runOnUiThread {
-                            notificationSystem.showToast("Value sent successfully")
-                        }
-                    } else {
-                        (context as Activity).runOnUiThread {
-                            notificationSystem.showToast("Failed to send value")
-                        }
+                if (value != "fire" && !value.contains("set_rotation_x=")) {
+                    val message = if (responseCode == HttpURLConnection.HTTP_OK) "Value sent successfully" else "Failed to send value"
+                    (context as Activity).runOnUiThread {
+                        notificationSystem.showToast(message)
                     }
                 }
 

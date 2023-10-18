@@ -24,4 +24,5 @@
     <string name="StatusConnectedToTurret">Połączono z Wieżyczką</string>
     <string name="StatusDisconnectedFromTurret">Nie połączono z Wieżyczką</string>
     <string name="StatusConnectedWithTurret">Status połączenia:</string>
+    <string name="al_btFire">STRZAŁ</string>
 </resources>

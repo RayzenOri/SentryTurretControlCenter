@@ -2,57 +2,40 @@ package com.example.sentryturretcontrolcenter
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
-import android.view.SurfaceHolder
-import android.view.SurfaceView
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import io.github.controlwear.virtual.joystick.android.JoystickView
-import org.videolan.libvlc.LibVLC
-import org.videolan.libvlc.Media
-import org.videolan.libvlc.MediaPlayer
+import android.webkit.WebView
+import android.webkit.WebViewClient
+
 
 class LandscapeActivity : BaseActivity() {
 
     private var isConnected:String = "Disconnected" //Wartość domyślna
-    private var mediaPlayer: MediaPlayer? = null
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landscape)
 
+        window.insetsController?.let {
+            it.hide(WindowInsets.Type.statusBars())
+            it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
 
-        val surfaceView = findViewById<SurfaceView>(R.id.surfaceView)
-        val libVLC = LibVLC(this, listOf("--no-drop-late-frames", "--no-skip-frames", "--rtsp-tcp").toMutableList())
-        mediaPlayer = MediaPlayer(libVLC)
+        val mWebView = findViewById<WebView>(R.id.webview)
+        mWebView.webViewClient = WebViewClient() // Ustawienie WebViewClient pozwala na otwieranie linków wewnątrz WebView zamiast w domyślnej przeglądarce.
 
-        val media = Media(libVLC, Uri.parse("rtsp://192.168.4.100:81/stream"))
-        mediaPlayer?.media = media
-        media.release()
+        val webSettings = mWebView.settings
+        webSettings.javaScriptEnabled = true // Włączenie JavaScriptu jest konieczne do poprawnego wyświetlania strumienia MJPEG.
 
-        surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
-            override fun surfaceCreated(holder: SurfaceHolder) {
-                mediaPlayer?.setMedia(media)
-                mediaPlayer?.setVideoTrackEnabled(true)
-            }
+        mWebView.loadUrl("http://192.168.4.100:81/stream") // Załaduj URL strumienia MJPEG.
 
-            override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-                // Obsłuż zmiany powierzchni tutaj
-            }
 
-            override fun surfaceDestroyed(holder: SurfaceHolder) {
-                // Obsłuż zniszczenie powierzchni tutaj
-                mediaPlayer?.stop()
-                mediaPlayer?.release()
-                mediaPlayer = null
-            }
-        })
-
-        mediaPlayer?.play()
 
 
         //Odczytanie przekazanego statusu połączenia
@@ -116,11 +99,9 @@ class LandscapeActivity : BaseActivity() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
+    fun fire(view: View){
+        val value = "fire"
+        ValueSender.sendValue(this,value);
     }
 
     fun goBackToMainActivity(view: View){

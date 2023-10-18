@@ -25,4 +25,5 @@
     <string name="StatusConnectedToTurret">Connected with The Turret</string>
     <string name="StatusDisconnectedFromTurret">Not Connected with The Turret</string>
     <string name="StatusConnectedWithTurret">Connection status:</string>
+    <string name="al_btFire">FIRE</string>
 </resources>
