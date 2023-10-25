@@ -11,6 +11,8 @@ import java.util.concurrent.Executors
 object ValueSender {
     private val executor = Executors.newSingleThreadExecutor()
 
+    val excluded = listOf("fire","manual_closed")
+
     fun sendValue(context: Context, value: String) {
         executor.execute {
             try {
@@ -22,7 +24,7 @@ object ValueSender {
 
                 val notificationSystem = NotificationSystem(context)
 
-                if (value != "fire" && !value.contains("set_rotation_x=")) {
+                if (excluded.none{it == value} && !value.contains("set_rotation_x=")) {
                     val message = if (responseCode == HttpURLConnection.HTTP_OK) "Value sent successfully" else "Failed to send value"
                     (context as Activity).runOnUiThread {
                         notificationSystem.showToast(message)
