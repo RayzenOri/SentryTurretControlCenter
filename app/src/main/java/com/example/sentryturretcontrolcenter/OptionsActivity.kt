@@ -29,10 +29,11 @@ class OptionsActivity : BaseActivity() {
         Log.d("Connection Status:", isConnected)
     }
 
-    fun sendRotationSpeed(view: View){
-        val value = "set_rotation_speed_x=" + binding.editRotationX.text.toString() +
-                "_y=" + binding.editRotationY.text.toString()
-        //ValueSender.sendValue(this,value)
+    fun sendRotationSpeed(view: View){ //I tak do zmiany ale na razie musi tak być, potem dodam odczyt z esp
+        val value = "set_rotation_speed_x=" + if(""==binding.editRotationX.text.toString()) "0"
+        else binding.editRotationX.text.toString() + "_y=" + if(""==binding.editRotationY.text.toString()) 0
+        else binding.editRotationY.text.toString()
+        ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
     fun sendPrecision(view: View){
@@ -53,33 +54,6 @@ class OptionsActivity : BaseActivity() {
         Log.d("TAG",value)
     }
 
-    /*private fun sendValue(value: String){
-        executor.execute{
-            try {
-                val url = URL("http://192.168.4.1/command?cmd=set_value=$value")
-                val connection = url.openConnection() as HttpURLConnection
-                connection.requestMethod = "GET"
-
-                val responseCode = connection.responseCode
-                val notificationSystem = NotificationSystem(this)
-                runOnUiThread{
-                    if(responseCode == HttpURLConnection.HTTP_OK){ // Successfully sent the value to ESP32
-
-                        notificationSystem.showToast(getString(R.string.notification_successSent)) // Wyświetlenie komunikatu
-                        binding.editRotationX.hint = value
-
-                    }else{
-                        notificationSystem.showToast(getString(R.string.notification_failSent)) // Wyświetlenie komunikatu
-                    }
-                }
-
-                connection.disconnect()
-            }catch (e:IOException){
-                e.printStackTrace()
-            }
-        }
-    }
-*/
     fun goBackToMainActivity(view: View){
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra("connectionStatus", isConnected)
