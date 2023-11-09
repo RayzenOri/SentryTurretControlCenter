@@ -50,7 +50,7 @@ class OptionsActivity : BaseActivity() {
     }
     fun sendMode(view: View){
         val value = "set_mode=" + if(binding.switchPatrolMode.isChecked) "on" else "off"
-        //ValueSender.sendValue(this,value)
+        ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
 
