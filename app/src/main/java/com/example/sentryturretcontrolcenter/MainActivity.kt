@@ -32,6 +32,8 @@ class MainActivity : BaseActivity() {
 
     }
     fun goToSettings(view: View){
+        val value = "options_opened"
+        ValueSender.sendValue(this, value)
         val intent = Intent(this, OptionsActivity::class.java).apply {
             putExtra("connectionStatus",  binding.amTextStatus.text.toString())
         }
@@ -40,6 +42,8 @@ class MainActivity : BaseActivity() {
     }
 
     fun goToManualControl(view: View){
+        val value = "manual_opened"
+        ValueSender.sendValue(this, value)
         val intent = Intent(this, LandscapeActivity::class.java).apply {
             putExtra("connectionStatus",  binding.amTextStatus.text.toString())
         }

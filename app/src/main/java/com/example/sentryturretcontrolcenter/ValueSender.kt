@@ -25,7 +25,7 @@ object ValueSender {
                 val notificationSystem = NotificationSystem(context)
 
                 if (excluded.none{it == value} && !value.contains("set_rotation_x=")) {
-                    val message = if (responseCode == HttpURLConnection.HTTP_OK) "Value sent successfully" else "Failed to send value"
+                    val message = if (responseCode == HttpURLConnection.HTTP_OK)  R.string.vs_Success.toString() else R.string.vs_failed.toString()
                     (context as Activity).runOnUiThread {
                         notificationSystem.showToast(message)
                     }
@@ -36,7 +36,7 @@ object ValueSender {
                 e.printStackTrace()
                 (context as Activity).runOnUiThread {
                     val notificationSystem = NotificationSystem(context)
-                    notificationSystem.showToast("Error: ${e.message}")
+                    notificationSystem.showToast(R.string.vs_error.toString()+" ${e.message}")
                 }
             }
         }

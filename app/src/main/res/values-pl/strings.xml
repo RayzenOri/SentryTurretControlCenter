@@ -25,4 +25,7 @@
     <string name="StatusDisconnectedFromTurret">Nie połączono z Wieżyczką</string>
     <string name="StatusConnectedWithTurret">Status połączenia:</string>
     <string name="al_btFire">STRZAŁ</string>
+    <string name="vs_Success">Przesłano pomyślnie</string>
+    <string name="vs_failed">Błąd przesyłania</string>
+    <string name="vs_error">Błąd:</string>
 </resources>

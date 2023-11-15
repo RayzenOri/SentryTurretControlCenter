@@ -6,7 +6,8 @@ import android.util.Log
 import android.view.View
 import java.util.concurrent.Executors
 import com.example.sentryturretcontrolcenter.databinding.ActivityOptionsBinding
-
+import okhttp3.*
+import java.io.IOException
 
 class OptionsActivity : BaseActivity() {
 
@@ -27,6 +28,29 @@ class OptionsActivity : BaseActivity() {
         //Odczytanie przekazanego statusu połączenia
         isConnected = intent.getStringExtra("connectionStatus").toString()
         Log.d("Connection Status:", isConnected)
+
+        // Utwórz klienta OkHttp
+        val client = OkHttpClient()
+
+        // Utwórz żądanie do serwera ESP32
+        val request = Request.Builder()
+            .url("http://192.168.4.1:80/sendData")
+            .build()
+
+        // Wyślij żądanie i zarejestruj funkcję zwrotną do obsługi odpowiedzi
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                // Odczytaj odpowiedź i zapisz do zmiennej
+                val responseData = response.body?.string()
+                Log.d("MyApp", "Odebrana wartość: $responseData")
+            }
+        })
     }
 
     fun sendRotationSpeed(view: View){ //I tak do zmiany ale na razie musi tak być, potem dodam odczyt z esp
@@ -39,7 +63,7 @@ class OptionsActivity : BaseActivity() {
     fun sendPrecision(view: View){
         val value = "set_precision_x=" + binding.editPrecisionX.text.toString() +
                 "_y=" + binding.editPrecisionY.text.toString()
-        //ValueSender.sendValue(this,value)
+        ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
     fun sendReturnTime(view: View){

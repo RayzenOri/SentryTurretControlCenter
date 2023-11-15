@@ -26,4 +26,7 @@
     <string name="StatusDisconnectedFromTurret">Not Connected with The Turret</string>
     <string name="StatusConnectedWithTurret">Connection status:</string>
     <string name="al_btFire">FIRE</string>
+    <string name="vs_Success">Value sent successfully</string>
+    <string name="vs_failed">Failed to send value</string>
+    <string name="vs_error">Error:</string>
 </resources>
