@@ -23,6 +23,11 @@ class OptionsActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
+        val btSend = binding.aoBtSendData
+        val switch = binding.switchPatrolMode
+        btSend.setOnClickListener { sendData() }
+        switch.setOnCheckedChangeListener { _, _ -> sendData() }
+
         val intent = intent
 
         //Odczytanie przekazanego statusu połączenia
@@ -49,34 +54,52 @@ class OptionsActivity : BaseActivity() {
                 // Odczytaj odpowiedź i zapisz do zmiennej
                 val responseData = response.body?.string()
                 Log.d("MyApp", "Odebrana wartość: $responseData")
+
+                // Parsowanie odpowiedzi
+                val lines = responseData?.split("\n")
+                lines?.forEach { line ->
+                    val parts = line.split("=")
+                    when (parts[0]) {
+                        "get_rotationSpeed_x" -> runOnUiThread { binding.editRotationX.hint = parts[1] }
+                        "get_rotationSpeed_y" -> runOnUiThread { binding.editRotationY.hint = parts[1] }
+                        "get_precision_x" -> runOnUiThread { binding.editPrecisionX.hint = parts[1] }
+                        "get_precision_y" -> runOnUiThread { binding.editPrecisionY.hint = parts[1] }
+                        "get_returnTime" -> runOnUiThread { binding.editReturnTime.hint = (parts[1].toInt()/1000).toString() }
+                        "get_patrolMode" -> runOnUiThread { binding.switchPatrolMode.isChecked = parts[1].toIntOrNull() ?: 0 != 0 }
+                    }
+                }
             }
         })
     }
 
-    fun sendRotationSpeed(view: View){ //I tak do zmiany ale na razie musi tak być, potem dodam odczyt z esp
-        val value = "set_rotation_speed_x=" + if(""==binding.editRotationX.text.toString()) "0"
+    fun sendData(){
+        var value = "set_rotation_speed_x=" + if(""==binding.editRotationX.text.toString()) 0
         else binding.editRotationX.text.toString() + "_y=" + if(""==binding.editRotationY.text.toString()) 0
         else binding.editRotationY.text.toString()
         ValueSender.sendValue(this,value)
         Log.d("TAG",value)
-    }
-    fun sendPrecision(view: View){
-        val value = "set_precision_x=" + binding.editPrecisionX.text.toString() +
-                "_y=" + binding.editPrecisionY.text.toString()
+
+        //Pole Precyzji
+        value = "set_precision_x=" + if(""==binding.editPrecisionX.text.toString()) 0
+        else binding.editPrecisionX.text.toString() + "_y=" + if(""==binding.editPrecisionY.text.toString()) 0
+        else binding.editPrecisionY.text.toString()
+        ValueSender.sendValue(this,value)
+        Log.d("TAG",value)
+
+        //Czas powrotu
+        var returnTime = if(""==binding.editReturnTime.text.toString()) 0
+        else binding.editReturnTime.text.toString().toInt()
+        if(returnTime > 60) returnTime = 60
+        value = "set_return_time=$returnTime"
+        ValueSender.sendValue(this,value)
+        Log.d("TAG",value)
+
+        //Tryb Patrolowania
+        value = "set_mode=" + if(binding.switchPatrolMode.isChecked) "on" else "off"
         ValueSender.sendValue(this,value)
         Log.d("TAG",value)
     }
-    fun sendReturnTime(view: View){
-        var value = "set_return_time=" + binding.editReturnTime.text.toString()
-        if(value.toInt()>60) value = "60"
-        ValueSender.sendValue(this,value)
-        Log.d("TAG",value)
-    }
-    fun sendMode(view: View){
-        val value = "set_mode=" + if(binding.switchPatrolMode.isChecked) "on" else "off"
-        ValueSender.sendValue(this,value)
-        Log.d("TAG",value)
-    }
+
 
     fun goBackToMainActivity(view: View){
         val intent = Intent(this, MainActivity::class.java).apply {

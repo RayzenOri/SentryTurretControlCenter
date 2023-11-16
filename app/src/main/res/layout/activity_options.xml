@@ -180,47 +180,42 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/editReturnTime"
-        app:layout_constraintVertical_bias="0.052"
-        android:onClick="sendMode"/>
+        app:layout_constraintVertical_bias="0.119" />
 
     <Button
-        android:id="@+id/ao_btSendRotation"
+        android:id="@+id/ao_btSendData"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:onClick="sendRotationSpeed"
+        android:layout_height="50dp"
         android:text="@string/ao_btSend"
-        app:layout_constraintBottom_toBottomOf="@+id/editRotationY"
-        app:layout_constraintEnd_toEndOf="@+id/ao_btSendPrecision"
+        app:layout_constraintBottom_toTopOf="@+id/switchPatrolMode"
+        app:layout_constraintEnd_toStartOf="@+id/editReturnTime"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/ao_btSendPrecision"
-        app:layout_constraintTop_toTopOf="@+id/editRotationY"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toBottomOf="@+id/labelReturnTime"
+        app:layout_constraintVertical_bias="0.55" />
 
-    <Button
-        android:id="@+id/ao_btSendPrecision"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:onClick="sendPrecision"
-        android:text="@string/ao_btSend"
-        app:layout_constraintBottom_toBottomOf="@+id/editPrecisionY"
-        app:layout_constraintEnd_toEndOf="@+id/ao_btSendReturnTime"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewSeconds"
-        app:layout_constraintTop_toTopOf="@+id/editPrecisionY"
-        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/textViewX"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="X"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/editRotationX"
+        app:layout_constraintEnd_toEndOf="@+id/editRotationX"
+        app:layout_constraintStart_toEndOf="@+id/labelRotorSP3" />
 
-    <Button
-        android:id="@+id/ao_btSendReturnTime"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="52dp"
-        android:onClick="sendReturnTime"
-        android:text="@string/ao_btSend"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewSeconds"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/textViewY"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Y"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/editRotationY"
+        app:layout_constraintEnd_toEndOf="@+id/editRotationY"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewSeconds"
-        app:layout_constraintTop_toTopOf="@+id/textViewSeconds"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/textViewX"
+        app:layout_constraintTop_toTopOf="@+id/textViewX" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
