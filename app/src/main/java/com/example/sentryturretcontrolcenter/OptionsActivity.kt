@@ -1,10 +1,10 @@
 package com.example.sentryturretcontrolcenter
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import java.util.concurrent.Executors
 import com.example.sentryturretcontrolcenter.databinding.ActivityOptionsBinding
 import okhttp3.*
 import java.io.IOException
@@ -13,7 +13,6 @@ class OptionsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityOptionsBinding
     private var isConnected:String = "Disconnected" //Wartość domyślna
-    private val executor = Executors.newSingleThreadExecutor() //pozwala na wykonywanie operacji w tle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +48,7 @@ class OptionsActivity : BaseActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                //if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
                 // Odczytaj odpowiedź i zapisz do zmiennej
                 val responseData = response.body?.string()
@@ -72,6 +71,11 @@ class OptionsActivity : BaseActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = getSharedPreferences("Sentry Turret Control Center", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("currentActivity", javaClass.simpleName).apply()
+    }
     fun sendData(){
         var value = "set_rotation_speed_x=" + if(""==binding.editRotationX.text.toString()) 0
         else binding.editRotationX.text.toString() + "_y=" + if(""==binding.editRotationY.text.toString()) 0

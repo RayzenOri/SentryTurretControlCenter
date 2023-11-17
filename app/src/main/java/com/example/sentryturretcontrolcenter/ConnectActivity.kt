@@ -45,6 +45,8 @@ class ConnectActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        val sharedPreferences = getSharedPreferences("Sentry Turret Control Center", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("currentActivity", javaClass.simpleName).apply()
 
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         Log.d("WIFI ENABLED", wifiManager.isWifiEnabled.toString())

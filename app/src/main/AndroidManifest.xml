@@ -27,6 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SentryTurretControlCenter"
         tools:targetApi="31">
+        <service android:name=".WifiCheckService" />
         <activity
             android:name=".LandscapeActivity"
             android:parentActivityName=".MainActivity"

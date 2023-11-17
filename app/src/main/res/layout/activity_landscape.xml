@@ -24,18 +24,17 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/fireButton"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toEndOf="@+id/joystickView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/fireButton"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:backgroundTint="#AAB2B4"
-        android:onClick="fire"
         android:text="@string/al_btFire"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

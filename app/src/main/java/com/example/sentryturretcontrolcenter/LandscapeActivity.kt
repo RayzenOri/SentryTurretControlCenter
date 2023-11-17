@@ -1,6 +1,7 @@
 package com.example.sentryturretcontrolcenter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.WindowInsetsController
 import io.github.controlwear.virtual.joystick.android.JoystickView
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Button
 
 
 class LandscapeActivity : BaseActivity() {
@@ -21,16 +23,20 @@ class LandscapeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landscape)
 
+        findViewById<Button>(R.id.fireButton).setOnClickListener { fire() } //Wywołanie funkcji strzał
+        //Po kliknięciu przycisku
+
         window.insetsController?.let {
             it.hide(WindowInsets.Type.statusBars())
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
 
         val mWebView = findViewById<WebView>(R.id.webview)
-        mWebView.webViewClient = WebViewClient() // Ustawienie WebViewClient pozwala na otwieranie linków wewnątrz WebView zamiast w domyślnej przeglądarce.
+        mWebView.webViewClient = WebViewClient() // Ustawienie WebViewClient pozwala na otwieranie
+        // linków wewnątrz WebView.
 
         val webSettings = mWebView.settings
-        webSettings.javaScriptEnabled = true // Włączenie JavaScriptu jest konieczne do poprawnego wyświetlania strumienia MJPEG.
+        webSettings.javaScriptEnabled = true // Włączenie do poprawnego wyświetlania strumienia MJPEG.
 
         mWebView.loadUrl("http://192.168.4.100:81/stream") // Załaduj URL strumienia MJPEG.
 
@@ -97,7 +103,11 @@ class LandscapeActivity : BaseActivity() {
         }
 
     }
-
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = getSharedPreferences("Sentry Turret Control Center", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("currentActivity", javaClass.simpleName).apply()
+    }
     fun fire() {
         val value = "fire"
         ValueSender.sendValue(this,value)

@@ -1,5 +1,6 @@
 package com.example.sentryturretcontrolcenter
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,11 @@ class MainActivity : BaseActivity() {
         //Odczytanie przekazanego statusu połączenia
         binding.amTextStatus.text = intent.getStringExtra("connectionStatus")
 
+    }
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = getSharedPreferences("Sentry Turret Control Center", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("currentActivity", javaClass.simpleName).apply()
     }
     fun disconnectFromDevice(view: View){
         //Przejście do aktywności połączeniowej
