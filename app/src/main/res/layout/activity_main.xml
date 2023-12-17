@@ -7,54 +7,39 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/am_btOff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
-
-    <Button
         android:id="@+id/btManual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="goToManualControl"
         android:text="@string/am_btManual"
-        app:layout_constraintBottom_toBottomOf="@+id/btOff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btOff"
-        app:layout_constraintTop_toTopOf="@+id/btOff"
-        app:layout_constraintVertical_bias="0.0"
-        android:onClick="goToManualControl"/>
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAuto" />
 
     <Button
         android:id="@+id/btAuto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
         android:backgroundTint="#FB1E1E"
         android:text="@string/am_btAuto"
-        app:layout_constraintBottom_toBottomOf="@+id/btOff"
-        app:layout_constraintEnd_toStartOf="@+id/btOff"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btOff"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/am_textStatus" />
 
     <Button
         android:id="@+id/btSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="goToSettings"
         android:text="@string/am_btSettings"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOff"
-        app:layout_constraintVertical_bias="0.05"
-        android:onClick="goToSettings"/>
+        app:layout_constraintTop_toBottomOf="@+id/btManual" />
 
     <Button
         android:id="@+id/btDisconnect"
@@ -73,8 +58,8 @@
         android:id="@+id/am_textStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="@string/StatusDisconnected"
-        app:layout_constraintBottom_toTopOf="@+id/btOff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
