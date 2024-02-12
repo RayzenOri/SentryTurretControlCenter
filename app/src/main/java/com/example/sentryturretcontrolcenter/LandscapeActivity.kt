@@ -48,7 +48,7 @@ class LandscapeActivity : BaseActivity() {
 
         val joystick = findViewById<JoystickView>(R.id.joystickView)
         joystick.setOnMoveListener { angle, strength ->
-            // tutaj możesz zrobić co chcesz z wartościami kąta i siły
+            // W tym miejscu można wykorzystać kąt oraz siłę joysticka
             //Log.d("Angle",angle.toString())
 
 

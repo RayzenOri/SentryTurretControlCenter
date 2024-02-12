@@ -89,10 +89,12 @@ class MainActivity : BaseActivity() {
         autoMode = !autoMode
         val value = if (autoMode) "autoMode=on" else "autoMode=off"
         ValueSender.sendValue(this, value)
+        Log.d("AutoMode",value)
     }
     fun goToSettings(view: View){
         val value = "options_opened"
         ValueSender.sendValue(this, value)
+        Log.d("Options",value)
         val intent = Intent(this, OptionsActivity::class.java).apply {
             putExtra("connectionStatus",  binding.amTextStatus.text.toString())
         }

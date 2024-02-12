@@ -52,11 +52,10 @@ class ConnectActivity : BaseActivity() {
         Log.d("WIFI ENABLED", wifiManager.isWifiEnabled.toString())
 
         if (wifiManager.isWifiEnabled) {
-            val wifiInfo = wifiManager.connectionInfo
-            val ssid = wifiInfo.ssid
+            val ssid = wifiManager.connectionInfo.ssid
             Log.d("SSID", ssid)
 
-            if (ssid == "\"ESP32\"") {
+            if (ssid == "\"Sentry Turret\"") {
                 // Jesteś podłączony do sieci ESP32
                 findViewById<Button>(R.id.btConnect).text = getString(R.string.ac_btContinue)
                 findViewById<TextView>(R.id.ac_textStatus).text = getString(R.string.StatusConnectedToTurret)
