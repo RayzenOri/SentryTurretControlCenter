@@ -38,8 +38,6 @@ class NotificationSystem(private val context: Context) {
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // Tutaj wywołaj swoją metodę lub funkcję, która będzie prosić użytkownika o uprawnienia
-            // na przykład przez wywołanie ActivityCompat.requestPermissions
             return
         }
 

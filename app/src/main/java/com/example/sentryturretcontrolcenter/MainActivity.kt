@@ -3,11 +3,9 @@ package com.example.sentryturretcontrolcenter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import com.example.sentryturretcontrolcenter.databinding.ActivityMainBinding
 import okhttp3.Call
 import okhttp3.Callback
@@ -15,7 +13,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
-import okhttp3.*
 import kotlin.properties.Delegates
 
 class MainActivity : BaseActivity() {
